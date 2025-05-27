@@ -1,4 +1,4 @@
-
+"use client"
 import {
   Sidebar,
   SidebarContent,
@@ -7,13 +7,13 @@ import {
   SidebarRail
 } from "@/shared/ui/sidebar"
 import { SidebarPanel } from "@/features/user/ui/sidebar-panel"
-import { type User } from "@/entities/user/model"
+import { UserStore } from "@/entities/user/model"
 import { AuthPanel } from "@/features/user/ui/auth"
 
 
 const AppSidebar = () => {
 
-  const user = null
+  const { user } = UserStore()
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader>
@@ -23,7 +23,7 @@ const AppSidebar = () => {
         
       </SidebarContent>
       <SidebarFooter>
-        { user && <SidebarPanel user={user} /> }
+        { user && <SidebarPanel /> }
         { !user && <AuthPanel /> }
       </SidebarFooter>
       <SidebarRail />

@@ -1,10 +1,10 @@
 "use client"
-import { type User } from "@/entities/user/model"
+import { UserStore, type User } from "@/entities/user/model"
 import { 
   SidebarMenu, 
   SidebarMenuItem, 
   SidebarMenuButton, 
-  useSidebar
+  useSidebar, 
 } from "@/shared/ui/sidebar"
 import { 
   DropdownMenu, 
@@ -15,10 +15,13 @@ import {
   DropdownMenuGroup, 
   DropdownMenuItem
 } from "@/shared/ui/dropdown-menu"
+import { Avatar, AvatarFallback, AvatarImage } from "@/shared/ui/avatar"
 import { ChevronsUpDown, Sparkles, BadgeCheck, CreditCard, Bell, LogOut } from "lucide-react"
 
-const SidebarPanel = ({ user }: { user: User }) => {
+const SidebarPanel = () => {
 
+	const userStore = UserStore()
+	const user = userStore.user as User
   const { isMobile } = useSidebar()
 
   return (
@@ -30,11 +33,7 @@ const SidebarPanel = ({ user }: { user: User }) => {
               size="lg"
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
-              
-              <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-semibold">{user.name}</span>
-                <span className="truncate text-xs">{user.email}</span>
-              </div>
+              <UserInfo user={user} />
               <ChevronsUpDown className="ml-auto size-4" />
             </SidebarMenuButton>
           </DropdownMenuTrigger>
@@ -46,11 +45,7 @@ const SidebarPanel = ({ user }: { user: User }) => {
           >
             <DropdownMenuLabel className="p-0 font-normal">
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                
-                <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-semibold">{user.name}</span>
-                  <span className="truncate text-xs">{user.email}</span>
-                </div>
+              	<UserInfo user={user} />
               </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
@@ -76,7 +71,7 @@ const SidebarPanel = ({ user }: { user: User }) => {
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            <DropdownMenuItem onClick={userStore.logout}>
               <LogOut />
               Log out
             </DropdownMenuItem>
@@ -84,6 +79,22 @@ const SidebarPanel = ({ user }: { user: User }) => {
         </DropdownMenu>
       </SidebarMenuItem>
     </SidebarMenu>
+  )
+}
+
+
+const UserInfo = ({ user }: { user: User }) => {
+	return (
+	<>
+		<Avatar>
+	   	<AvatarImage src={user.avatar_url} />
+	   	<AvatarFallback>DS</AvatarFallback>
+	  </Avatar>
+	  <div className="grid flex-1 text-left text-sm leading-tight">
+	    <span className="truncate font-semibold">{user.login}</span>
+	    <span className="truncate text-xs">{user.email || user.name}</span>
+	  </div>
+	</>
   )
 }
 

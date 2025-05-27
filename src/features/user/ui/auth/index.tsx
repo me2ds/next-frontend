@@ -14,11 +14,10 @@ import {
 } from "@/shared/ui/dropdown-menu";
 import { ChevronsUpDown, LogIn } from "lucide-react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 
 const AuthPanel = () => {
   const { isMobile } = useSidebar();
-  const router = useRouter();
   const clientId = process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID
   const callbackUrl = process.env.NEXT_PUBLIC_GITHUB_CALLBACK_URL
   const authVariants = [
@@ -61,7 +60,7 @@ const AuthPanel = () => {
               {authVariants.map((variant) => (
                 <DropdownMenuItem
                   key={variant.name}
-                  onClick={() => router.push(variant.url)}
+                  onClick={() => redirect(variant.url)}
                 >
                   <Image src={variant.icon} alt="" width={"16"} height={"16"} />
                   {variant.name}
