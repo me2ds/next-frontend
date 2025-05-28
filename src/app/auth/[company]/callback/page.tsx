@@ -19,12 +19,10 @@ const AuthCallback = () => {
 		    headers: { "Content-Type": "Application/json" },
 		    keepalive: true
 		  })
-		  if (!response.ok) {
-				router.push("/")
-		    return
+		  if (response.ok) {
+				const { token }: { token: string } = await response.json()
+				cookie.set("token", token)
 		  }
-			const { token }: { token: string } = await response.json()
-			cookie.set("token", token)
 			router.push("/")
 		})()
 	}, [router, code, company])
