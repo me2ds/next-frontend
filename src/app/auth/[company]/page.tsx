@@ -1,10 +1,10 @@
 "use client"
-import { useParams, useRouter, useSearchParams } from "next/navigation"
-import { type Company } from "@/shared/model"
-import { useEffect } from "react"
 import { BACKEND_API } from "@/shared/api/http-client"
-import cookie from "js-cookie"
+import { type Company } from "@/shared/model"
 import { Loader } from "@/shared/ui/loader"
+import cookie from "js-cookie"
+import { useParams, useRouter, useSearchParams } from "next/navigation"
+import { useEffect } from "react"
 
 const AuthCallback = () => {
   const searchParams = useSearchParams()
@@ -21,7 +21,8 @@ const AuthCallback = () => {
 		  })
 		  if (response.ok) {
 				const { token }: { token: string } = await response.json()
-				cookie.set("token", token)
+				cookie.set("auth_token", token)
+				cookie.set("auth_company", company)
 		  }
 			router.push("/")
 		})()

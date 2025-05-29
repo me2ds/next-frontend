@@ -1,42 +1,24 @@
 "use client";
+import { authVariants } from "@/entities/auth/model";
 import {
-  SidebarMenu,
-  SidebarMenuItem,
-  SidebarMenuButton,
-  useSidebar,
-} from "@/shared/ui/sidebar";
-import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuGroup,
+    DropdownMenuItem,
+    DropdownMenuTrigger,
 } from "@/shared/ui/dropdown-menu";
+import {
+    SidebarMenu,
+    SidebarMenuButton,
+    SidebarMenuItem,
+    useSidebar,
+} from "@/shared/ui/sidebar";
 import { ChevronsUpDown, LogIn } from "lucide-react";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 
 const AuthPanel = () => {
   const { isMobile } = useSidebar();
-  const clientId = process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID
-  const callbackUrl = process.env.NEXT_PUBLIC_GITHUB_CALLBACK_URL
-  const authVariants = [
-    {
-      name: "Google",
-      icon: "google-icon.svg",
-      url: "",
-    },
-    {
-      name: "Github",
-      icon: "github-icon.svg",
-      url: `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${callbackUrl}&scope=read:user`,
-    },
-    {
-      name: "Telegram",
-      icon: "telegram-icon.svg",
-      url: "",
-    },
-  ];
   return (
     <SidebarMenu>
       <SidebarMenuItem>

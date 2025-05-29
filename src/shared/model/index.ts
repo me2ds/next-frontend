@@ -1,5 +1,5 @@
 
 
-type Company = "github" | "google" | "telegram"
+type Company = "github" | "google"
 
 export { type Company }
