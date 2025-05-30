@@ -1,5 +1,5 @@
 "use client";
-import { authVariants } from "@/entities/auth/model";
+import { authVariants } from "@/entities/company/model";
 import {
     DropdownMenu,
     DropdownMenuContent,

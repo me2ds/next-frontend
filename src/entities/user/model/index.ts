@@ -1,20 +1,16 @@
 import { BACKEND_API } from "@/shared/api/http-client"
-import { Company } from "@/shared/model"
 import cookie from "js-cookie"
 import { create } from "zustand"
 
 type User = {
-	id?: number,
-	name?: string
-  login?: string, 
-  email?: string,
-  avatar_url?: string
+	username: string
+  avatar: string
 }
 
 type UserState = {
   user: User | null,
   setUser: (value: User) => void,
-  getUser: (token: string | null, company: Company | null) => void,
+  getUser: (token: string | null) => void,
   logout: () => void,
 }
 
@@ -25,9 +21,9 @@ const initialStore = {
 const UserStore = create<UserState>()((set) => ({
 	...initialStore,
 	setUser: (value) => set(() => ({ user: value })),
-	getUser: async (token, company) => {
-		if (!token || !company) return
-		const response = await fetch(`${BACKEND_API}/profile/${company}`, { 
+	getUser: async (token) => {
+		if (!token) return
+		const response = await fetch(`${BACKEND_API}/profile`, { 
 			keepalive: true,
 			headers: {
 				Authorization: `Bearer ${token}`
@@ -39,7 +35,6 @@ const UserStore = create<UserState>()((set) => ({
 	},
 	logout: async () => {
 		cookie.remove("auth_token")
-		cookie.remove("auth_company")
 		set(initialStore)
 	}
 }))

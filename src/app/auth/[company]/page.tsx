@@ -22,7 +22,6 @@ const AuthCallback = () => {
 		  if (response.ok) {
 				const { token }: { token: string } = await response.json()
 				cookie.set("auth_token", token)
-				cookie.set("auth_company", company)
 		  }
 			router.push("/")
 		})()
