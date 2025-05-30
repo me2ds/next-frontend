@@ -34,7 +34,7 @@ const SidebarPanel = () => {
           <DropdownMenuTrigger asChild>
             <SidebarMenuButton
               size="lg"
-              className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+              className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground cursor-pointer"
             >
 							<UserInfo user={user} company={company} />
               <ChevronsUpDown className="ml-auto size-4" />
