@@ -1,7 +1,7 @@
 "use client"
 import { BACKEND_API } from "@/shared/api/http-client"
 import { type Company } from "@/shared/model"
-import { Loader } from "@/shared/ui/loader"
+import { Spinner } from "@/shared/ui/spinner"
 import cookie from "js-cookie"
 import { useParams, useRouter, useSearchParams } from "next/navigation"
 import { useEffect } from "react"
@@ -29,7 +29,7 @@ const AuthCallback = () => {
 	return (
 		<main className={"flex w-dvw h-dvh justify-center items-center"}>
 			<div className={"flex flex-col gap-4"}>
-				<Loader className={"self-center"} />
+				<Spinner className={"self-center w-12 h-12"} />
 				<span>Загружаем твой профиль...</span>
 			</div>
 		</main>

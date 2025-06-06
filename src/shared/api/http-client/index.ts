@@ -5,11 +5,11 @@ const BACKEND_API = "http://localhost:8000" as const
 
 const httpClient = axios.create({
 	baseURL: BACKEND_API,
-	withCredentials: true
+	withCredentials: false,
 })
 
 httpClient.interceptors.request.use((config) => {
-	config.headers.Authorization = `Bearer ${cookie.get("token")}`
+	config.headers.Authorization = `Bearer ${cookie.get("auth_token")}`
 	return config;
 })
 

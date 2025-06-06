@@ -6,10 +6,10 @@ type Props = {
 	className?: string
 }
 
-const Loader = ({ className }: Props) => {
+const Spinner = ({ className }: Props) => {
 	return (
 		<span className={clsx(styles.loader, className)} />
 	)
 }
 
-export { Loader }
+export { Spinner }
