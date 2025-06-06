@@ -23,15 +23,16 @@ const UserStore = create<UserState>()((set) => ({
 	setUser: (value) => set(() => ({ user: value })),
 	getUser: async (token) => {
 		if (!token) return
-		const response = await fetch(`${BACKEND_API}/profile`, { 
-			keepalive: true,
-			headers: {
-				Authorization: `Bearer ${token}`
-			}
-		})
-		if (!response.ok) return
-		const { user } = await response.json() as { user: User }
-		set({ user })
+		try {
+			const response = await fetch(`${BACKEND_API}/profile`, { 
+				keepalive: true,
+				headers: {
+					Authorization: `Bearer ${token}`
+				}
+			})
+			const { user } = await response.json() as { user: User }
+			set({ user })
+		} catch {}
 	},
 	logout: async () => {
 		cookie.remove("auth_token")
