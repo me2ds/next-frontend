@@ -4,20 +4,15 @@ import {
   SidebarContent,
   SidebarFooter,
   SidebarGroup,
-  SidebarGroupLabel,
   SidebarHeader,
-  SidebarMenu,
   SidebarRail,
-  SidebarMenuItem,
-  SidebarMenuButton,
 } from "@/shared/ui/sidebar"
 import { SidebarPanel } from "@/features/user/ui/sidebar-panel"
 import { UserStore } from "@/entities/user/model"
 import { AuthPanel } from "@/features/user/ui/auth"
-import { PlaylistsPanel } from "./playlists-panel"
-import { AudioWaveform } from "lucide-react"
-import Link from "next/link"
 import { AuthGuard } from "@/entities/user/ui/auth-guard"
+import { MusicPanel } from "./music/ui"
+import { ChatPanel } from "./chat/ui"
 
 
 const AppSidebar = () => {
@@ -32,18 +27,8 @@ const AppSidebar = () => {
       <SidebarContent>
         <SidebarGroup>
           <AuthGuard>
-            <SidebarGroupLabel>Music</SidebarGroupLabel>
-            <SidebarMenu>
-              <PlaylistsPanel />
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild>
-                  <Link href="/wave">
-                    <AudioWaveform />
-                    <span>Wave</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-            </SidebarMenu>
+            <MusicPanel />
+            <ChatPanel />
           </AuthGuard>
         </SidebarGroup>
       </SidebarContent>

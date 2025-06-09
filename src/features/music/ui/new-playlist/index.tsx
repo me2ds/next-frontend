@@ -32,7 +32,7 @@ const CreateNewPlaylist = () => {
       <DialogTrigger asChild>
         <SidebarMenuSubButton>
           <Plus />
-          <span>Create new playlist</span>
+          <span>New Playlist</span>
         </SidebarMenuSubButton>
       </DialogTrigger>
       <DialogContent className="flex flex-col gap-8">

@@ -3,6 +3,8 @@ import cookie from "js-cookie"
 import { create } from "zustand"
 
 type User = {
+  id: string
+  authIds: string[]
 	username: string
   avatar: string
 }

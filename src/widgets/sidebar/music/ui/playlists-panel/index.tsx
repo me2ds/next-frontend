@@ -8,7 +8,6 @@ import {
   SidebarMenuItem,
   SidebarMenuButton,
   SidebarMenuSub,
-  SidebarMenuSubItem,
   SidebarMenuSubButton,
 } from "@/shared/ui/sidebar"
 import { ChevronRight, ListMusic, Trash2 } from "lucide-react"
@@ -40,8 +39,15 @@ const PlaylistsPanel = () => {
             <CreateNewPlaylist />
             {playlists.map((playlist: Playlist) => (
               <SidebarMenuSubButton key={playlist.id}>
-                <span onClick={() => router.push(`/playlist/${playlist.id}`)}>{playlist.name}</span>
-                <Trash2 className="ml-auto cursor-pointer" onClick={() => deletePlaylist(playlist.id)}/>
+                <span
+                  onClick={() => router.push(`/music/playlist/${playlist.id}`)}
+                >
+                  {playlist.name}
+                </span>
+                <Trash2
+                  className="ml-auto cursor-pointer"
+                  onClick={() => deletePlaylist(playlist.id)}
+                />
               </SidebarMenuSubButton>
             ))}
           </SidebarMenuSub>
