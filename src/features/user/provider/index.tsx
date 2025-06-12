@@ -5,20 +5,19 @@ import { useEffect } from "react"
 import cookie from "js-cookie"
 
 type Props = {
-	children: React.ReactNode,
+  children: React.ReactNode
 }
 
 const UserProvider = ({ children }: Props) => {
-	
-	const token = cookie.get("auth_token") || null
-	
-	const { getUser } = UserStore()
-	
-	useEffect(() => {
-		getUser(token)
-	}, [getUser, token])
-	
-	return <>{ children }</>
+  const authToken = cookie.get("authToken") || null
+
+  const { getUser } = UserStore()
+
+  useEffect(() => {
+    getUser(authToken)
+  }, [getUser, authToken])
+
+  return <>{children}</>
 }
 
 export { UserProvider }

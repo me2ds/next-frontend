@@ -9,7 +9,7 @@ const httpClient = axios.create({
 })
 
 httpClient.interceptors.request.use((config) => {
-	config.headers.Authorization = `Bearer ${cookie.get("auth_token")}`
+	config.headers.Authorization = `Bearer ${cookie.get("authToken")}`
 	return config;
 })
 
