@@ -7,18 +7,27 @@ import {
   SidebarHeader,
   SidebarRail,
 } from "@/shared/ui/sidebar"
-import { SidebarPanel } from "@/features/user/ui/sidebar-panel"
+import dynamic from "next/dynamic"
+import { Suspense } from "react"
+import { AuthStore } from "@/entities/auth/model"
 import { UserStore } from "@/entities/user/model"
-import { AuthPanel } from "@/features/user/ui/auth"
-import { AuthGuard } from "@/entities/user/ui/auth-guard"
+import { Loader } from "@/shared/ui/loader"
+import { AuthDialog } from "@/features/auth/ui/dialog"
+
+const UserInfo = dynamic(() =>
+  import("@/features/user/ui/info").then(({ UserInfo }) => UserInfo),
+)
+import { AuthGuard } from "@/features/auth/ui/guard"
 import { MusicPanel } from "./music/ui"
 import { ChatPanel } from "./chat/ui"
 
 
 const AppSidebar = () => {
 
+  const { showAuth } = AuthStore()
   const { user } = UserStore()
   
+
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader>
@@ -32,9 +41,20 @@ const AppSidebar = () => {
           </AuthGuard>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter>
-        { user && <SidebarPanel /> }
-        { !user && <AuthPanel /> }
+      <SidebarFooter className={"flex justify-center items-center"}>
+        {!showAuth && (
+          <Suspense
+            fallback={
+              <div className={"mb-1 flex flex-col items-center justify-center"}>
+                <Loader />
+              </div>
+            }
+          >
+            {user && <UserInfo />}
+            {!user && <div className={"size-8"}></div>}
+          </Suspense>
+        )}
+        {showAuth && <AuthDialog />}
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>

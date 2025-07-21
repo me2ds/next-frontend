@@ -1,4 +1,4 @@
-
+type Company = "google" | "github"
 
 type Variant = {
 	name: string,
@@ -47,4 +47,4 @@ const authVariants: Variant[] = [
 	initGithubAuth(),
 ] as const;
 
-export { authVariants }
+export { authVariants, type Company }
