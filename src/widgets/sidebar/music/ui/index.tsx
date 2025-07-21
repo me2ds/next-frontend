@@ -8,6 +8,7 @@ import {
 import { AudioWaveform, Shuffle } from "lucide-react"
 import { PlaylistsPanel } from "./playlists-panel"
 import Link from "next/link"
+import { routes } from "@/shared/config/routes"
 
 const MusicPanel = () => {
   return (
@@ -17,7 +18,7 @@ const MusicPanel = () => {
         <PlaylistsPanel />
         <SidebarMenuItem>
           <SidebarMenuButton asChild>
-            <Link href="/music/wave">
+            <Link href={routes.music.wave}>
               <AudioWaveform />
               <span>Wave</span>
             </Link>
@@ -25,7 +26,7 @@ const MusicPanel = () => {
         </SidebarMenuItem>
         <SidebarMenuItem>
           <SidebarMenuButton asChild>
-            <Link href="/music/random">
+            <Link href={routes.music.random}>
               <Shuffle />
               <span>Random</span>
             </Link>

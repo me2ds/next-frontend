@@ -1,59 +1,35 @@
-// import { create } from "zustand"
-// import { httpClient } from "@/shared/api/http-client"
-// import { toast } from "sonner"
+import { create } from "zustand"
 
-// type Playlist = {
-//   id: string
-//   name: string
-//   ownerId: string
-// }
+type Playlist = {
+  id: string
+  name: string
+  ownerId: string
+}
 
-// type PlaylistStore = {
-//   playlists: Playlist[]
-//   addPlaylist: (name: string) => void
-//   getPlaylists: () => void
-//   deletePlaylist: (playlistId: string) => void
-// }
+type PlaylistStore = {
+  playlists: Playlist[]
+  addPlaylist: (playlist: Playlist) => void
+  setPlaylists: (playlists: Playlist[]) => void
+  deletePlaylist: (playlistId: string) => void
+}
 
-// const initialState = {
-//   playlists: [],
-// }
+const initialState = {
+  playlists: [],
+}
 
-// const playlistStore = create<PlaylistStore>((set) => ({
-//   ...initialState,
-//   addPlaylist: async (name) => {
-//     try {
-//       const { data } = await httpClient.post<{ playlist: Playlist }>(
-//         "/playlists",
-//         { name }
-//       )
-//       set((state) => ({ playlists: [...state.playlists, data.playlist] }))
-//       toast.success("Playlist created")
-//     } catch {
-//       toast.error("Failed to add playlist")
-//     }
-//   },
-//   getPlaylists: async () => {
-//     try {
-//       const { data } = await httpClient.get<{ playlists: Playlist[] }>(
-//         "/playlists"
-//       )
-//       set({ playlists: data.playlists })
-//     } catch {
-//       toast.error("Failed to get playlists")
-//     }
-//   },
-//   deletePlaylist: async (playlistId) => {
-//     try {
-//       const { data } = await httpClient.delete<{ playlists: Playlist[] }>(
-//         `/playlists/${playlistId}`
-//       )
-//       set({ playlists: data.playlists })
-//       toast.success("Playlist deleted")
-//     } catch {
-//       toast.error("Failed to delete playlist")
-//     }
-//   },
-// }))
+const playlistStore = create<PlaylistStore>((set) => ({
+  ...initialState,
+  addPlaylist: (playlist) => {
+    set((state) => ({ playlists: [...state.playlists, playlist] }))
+  },
+  setPlaylists: (playlists) => {
+    set({ playlists })
+  },
+  deletePlaylist: (playlistId) => {
+    set((state) => ({
+      playlists: state.playlists.filter((playlist) => playlist.id !== playlistId),
+    }))
+  },
+}))
 
-// export { playlistStore, type Playlist }
+export { playlistStore, type Playlist }

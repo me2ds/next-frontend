@@ -13,16 +13,13 @@ import {
 import { ChevronRight, ListMusic, Trash2 } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { CreateNewPlaylist } from "@/features/music/ui/new-playlist"
-// import { playlistStore, type Playlist } from "@/entities/music/model"
-import { useEffect } from "react"
+import { playlistStore, Playlist } from "@/entities/music/model"
+import { deletePlaylist } from "@/features/music/api/delete-playlist"
+import { routes } from "@/shared/config/routes"
 
 const PlaylistsPanel = () => {
-  // const { playlists, getPlaylists, deletePlaylist } = playlistStore()
-  // const router = useRouter()
-
-  // useEffect(() => {
-  //   getPlaylists()
-  // }, [getPlaylists])
+  const { playlists } = playlistStore()
+  const router = useRouter()
 
   return (
     <Collapsible asChild className="group/collapsible">
@@ -37,10 +34,10 @@ const PlaylistsPanel = () => {
         <CollapsibleContent>
           <SidebarMenuSub>
             <CreateNewPlaylist />
-            {/* {playlists.map((playlist: Playlist) => (
+            {playlists.map((playlist: Playlist) => (
               <SidebarMenuSubButton key={playlist.id}>
                 <span
-                  onClick={() => router.push(`/music/playlist/${playlist.id}`)}
+                  onClick={() => router.push(routes.music.playlist.id(playlist.id))}
                 >
                   {playlist.name}
                 </span>
@@ -49,7 +46,7 @@ const PlaylistsPanel = () => {
                   onClick={() => deletePlaylist(playlist.id)}
                 />
               </SidebarMenuSubButton>
-            ))} */}
+            ))}
           </SidebarMenuSub>
         </CollapsibleContent>
       </SidebarMenuItem>

@@ -18,7 +18,7 @@ const ClientSideUserProvider = ({
       setShowAuth(true)
     }
     setUser(user)
-  }, [user, setUser])
+  }, [user])
   return children
 }
 

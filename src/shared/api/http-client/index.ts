@@ -3,7 +3,7 @@ import { cookies } from "next/headers"
 
 const httpClient = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
-  withCredentials: false,
+  withCredentials: true,
 })
 
 httpClient.interceptors.request.use(async (config) => {

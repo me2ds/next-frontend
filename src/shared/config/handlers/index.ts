@@ -4,6 +4,9 @@ const handlers = {
       root: "/user",
       profile: "/user/profile",
     },
+    playlist: {
+      all: "/playlists",
+    }
   },
   post: {
     user: {
@@ -13,6 +16,14 @@ const handlers = {
         company: (company: string) => `/user/auth/${company}`,
       },
     },
+    playlist: {
+      all: "/playlists",
+    },
   },
+  delete: {
+    playlist: {
+      id: (id: string) => `/playlist/${id}`,
+    }
+  }
 }
 export { handlers }

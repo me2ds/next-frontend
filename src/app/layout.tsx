@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import "./globals.css"
 import { ThemeProvider } from "next-themes"
 import { ThemeToggle } from "@/widgets/theme-toggle"
-import { QueryProvider } from "@/shared/providers"
+import { QueryProvider } from "@/shared/config/provider/query"
 import { Toaster } from "sonner"
 
 export const metadata: Metadata = {

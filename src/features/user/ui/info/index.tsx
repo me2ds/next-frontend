@@ -53,7 +53,7 @@ const UserInfo = () => {
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <Link href={routes.accountRoute}>
+              <Link href={routes.account}>
                 <DropdownMenuItem>
                   <BadgeCheck />
                   Account
