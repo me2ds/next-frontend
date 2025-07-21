@@ -1,10 +1,9 @@
-"use server"
+"use client"
 
 import { UserStore } from "@/entities/user/model"
 
-
-const AuthGuard = async ({ children }: { children: React.ReactNode }) => {
-  const user = UserStore().user
+const AuthGuard = ({ children }: { children: React.ReactNode }) => {
+  const { user } = UserStore()
   if (user) return children
 }
 

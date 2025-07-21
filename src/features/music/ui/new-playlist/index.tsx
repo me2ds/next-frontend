@@ -14,17 +14,17 @@ import { Label } from "@/shared/ui/label"
 import { Input } from "@/shared/ui/input"
 import { Button } from "@/shared/ui/button"
 import { useForm, SubmitHandler } from "react-hook-form"
-import { playlistStore } from "@/entities/music/model"
+// import { playlistStore } from "@/entities/music/model"
 
 type FormInput = {
   name: string
 }
 
 const CreateNewPlaylist = () => {
-  const { addPlaylist } = playlistStore()
+  // const { addPlaylist } = playlistStore()
   const { register, handleSubmit } = useForm<FormInput>()
   const onSubmit: SubmitHandler<FormInput> = (data) => {
-    addPlaylist(data.name)
+    // addPlaylist(data.name)
   }
 
   return (
