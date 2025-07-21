@@ -2,6 +2,21 @@ import axios, { AxiosError } from 'axios'
 import {cookies} from "next/headers"
 
 const httpClient = axios.create({
+<<<<<<< HEAD
+	baseURL: BACKEND_API,
+	withCredentials: false,
+})
+
+httpClient.interceptors.request.use((config) => {
+	config.headers.Authorization = `Bearer ${cookie.get("authToken")}`
+	return config;
+})
+
+export { 
+	httpClient,
+	BACKEND_API
+}
+=======
   baseURL: process.env.NEXT_PUBLIC_API_URL,
   withCredentials: false,
 })
@@ -20,3 +35,4 @@ httpClient.interceptors.response.use(
   }
 )
 export { httpClient }
+>>>>>>> main

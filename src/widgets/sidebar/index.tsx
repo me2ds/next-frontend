@@ -3,8 +3,9 @@ import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
+  SidebarGroup,
   SidebarHeader,
-  SidebarRail
+  SidebarRail,
 } from "@/shared/ui/sidebar"
 import dynamic from "next/dynamic"
 import { Suspense } from "react"
@@ -16,12 +17,16 @@ import { AuthDialog } from "@/features/auth/ui/dialog"
 const UserInfo = dynamic(() =>
   import("@/features/user/ui/info").then(({ UserInfo }) => UserInfo),
 )
+import { AuthGuard } from "@/features/auth/ui/guard"
+import { MusicPanel } from "./music/ui"
+import { ChatPanel } from "./chat/ui"
 
 
 const AppSidebar = () => {
 
   const { showAuth } = AuthStore()
   const { user } = UserStore()
+  
 
   return (
     <Sidebar collapsible="icon">
@@ -29,7 +34,12 @@ const AppSidebar = () => {
         
       </SidebarHeader>
       <SidebarContent>
-        
+        <SidebarGroup>
+          <AuthGuard>
+            <MusicPanel />
+            <ChatPanel />
+          </AuthGuard>
+        </SidebarGroup>
       </SidebarContent>
       <SidebarFooter className={"flex justify-center items-center"}>
         {!showAuth && (
