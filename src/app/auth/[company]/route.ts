@@ -15,7 +15,7 @@ const GET = async (
   const { company } = await params
   const code = new URL(request.url).searchParams.get("code") as string | null
   const cookieStore = await cookies()
-  const redirectTo = cookieStore.get("redirectTo")?.value ?? routes.rootRoute
+  const redirectTo = cookieStore.get("redirectTo")?.value ?? routes.root
   cookieStore.delete("redirectTo")
   await auth(code, company)
   return redirect(redirectTo)

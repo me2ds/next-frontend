@@ -15,6 +15,7 @@ import { Input } from "@/shared/ui/input"
 import { Button } from "@/shared/ui/button"
 import { useForm, SubmitHandler } from "react-hook-form"
 import { addPlaylist } from "@/features/music/api/add-playlist"
+import { playlistStore } from "@/entities/music/playlist/model"
 
 type FormInput = {
   name: string
@@ -23,7 +24,10 @@ type FormInput = {
 const CreateNewPlaylist = () => {
   const { register, handleSubmit } = useForm<FormInput>()
   const onSubmit: SubmitHandler<FormInput> = async (data) => {
-    await addPlaylist(data.name)
+    const playlist = await addPlaylist(data.name)
+    if (playlist) {
+      playlistStore.getState().addPlaylist(playlist)
+    }
   }
 
   return (

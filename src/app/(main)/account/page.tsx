@@ -1,7 +1,10 @@
 "use server"
 
-const AccountPage = async () => {
-  return <>account page</>
+const AccountPage = () => {
+  return (
+    <>
+    </>
+  )
 }
 
 export default AccountPage

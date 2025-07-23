@@ -1,29 +1,52 @@
 const handlers = {
   get: {
     user: {
-      root: "/user",
       profile: "/user/profile",
     },
     playlist: {
-      all: "/playlists",
-    }
+      all: "/playlist",
+      id: (id: string) => `/playlist/${id}`,
+      ownerId: (ownerId: string) => `/playlist/owner/${ownerId}`,
+    },
+    composition: {
+      all: "/composition",
+      id: (id: string) => `/composition/${id}`,
+      ownerId: (ownerId: string) => `/composition/owner/${ownerId}`,
+    },
   },
   post: {
     user: {
-      root: "/user",
       auth: {
-        root: "/auth",
         company: (company: string) => `/user/auth/${company}`,
       },
     },
     playlist: {
-      all: "/playlists",
+      create: "/playlist",
+      addComposition: (id: string, compositionId: string) =>
+        `/playlist/${id}/composition/${compositionId}`,
+    },
+    composition: {
+      create: "/composition",
+    },
+  },
+  patch: {
+    playlist: {
+      update: (id: string) => `/playlist/${id}`,
+    },
+    composition: {
+      update: (id: string) => `/composition/${id}`,
     },
   },
   delete: {
     playlist: {
       id: (id: string) => `/playlist/${id}`,
-    }
-  }
-}
-export { handlers }
+      removeComposition: (id: string, compositionId: string) =>
+        `/playlist/${id}/composition/${compositionId}`,
+    },
+    composition: {
+      id: (id: string) => `/composition/${id}`,
+    },
+  },
+};
+
+export { handlers };

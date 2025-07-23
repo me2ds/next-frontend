@@ -13,13 +13,20 @@ import {
 import { ChevronRight, ListMusic, Trash2 } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { CreateNewPlaylist } from "@/features/music/ui/new-playlist"
-import { playlistStore, Playlist } from "@/entities/music/model"
+import { playlistStore, Playlist } from "@/entities/music/playlist/model"
 import { deletePlaylist } from "@/features/music/api/delete-playlist"
 import { routes } from "@/shared/config/routes"
 
 const PlaylistsPanel = () => {
   const { playlists } = playlistStore()
   const router = useRouter()
+
+  const handleDelete = async (playlistId: string) => {
+    const success = await deletePlaylist(playlistId)
+    if (success) {
+      playlistStore.getState().deletePlaylist(playlistId)
+    }
+  }
 
   return (
     <Collapsible asChild className="group/collapsible">
@@ -37,13 +44,15 @@ const PlaylistsPanel = () => {
             {playlists.map((playlist: Playlist) => (
               <SidebarMenuSubButton key={playlist.id}>
                 <span
-                  onClick={() => router.push(routes.music.playlist.id(playlist.id))}
+                  onClick={() =>
+                    router.push(routes.music.playlist.id(playlist.id))
+                  }
                 >
                   {playlist.name}
                 </span>
                 <Trash2
                   className="ml-auto cursor-pointer"
-                  onClick={() => deletePlaylist(playlist.id)}
+                  onClick={() => handleDelete(playlist.id)}
                 />
               </SidebarMenuSubButton>
             ))}
