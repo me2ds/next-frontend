@@ -1,7 +1,9 @@
 const handlers = {
   get: {
     user: {
+      me: "/user/me",
       profile: "/user/profile",
+      id: (id: string) => `/user/${id}`,
     },
     playlist: {
       all: "/playlist",
@@ -16,6 +18,7 @@ const handlers = {
   },
   post: {
     user: {
+      create: "/user",
       auth: {
         company: (company: string) => `/user/auth/${company}`,
       },
@@ -30,6 +33,9 @@ const handlers = {
     },
   },
   patch: {
+    user: {
+      update: "/user",
+    },
     playlist: {
       update: (id: string) => `/playlist/${id}`,
     },

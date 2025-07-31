@@ -10,9 +10,10 @@ const PlaylistProvider = async ({
 }) => {
   const playlists = await getPlaylists()
   return (
-    <ClientSidePlaylistProvider playlists={playlists}>
+    <>
+      <ClientSidePlaylistProvider playlists={playlists} />
       {children}
-    </ClientSidePlaylistProvider>
+    </>
   )
 }
 

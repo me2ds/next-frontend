@@ -10,8 +10,9 @@ const getUser = async () => {
       handlers.get.user.profile
     )
     return data.user
-  } catch {}
-  return null
+  } catch (error) {
+    throw error
+  }
 }
 
 export { getUser }

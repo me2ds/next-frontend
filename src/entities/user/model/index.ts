@@ -4,7 +4,7 @@ type User = {
   id: string
   authIds: string[]
   username: string
-  avatar: string
+  avatar: string | null
 }
 
 type UserState = {

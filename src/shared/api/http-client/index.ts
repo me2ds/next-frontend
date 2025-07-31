@@ -13,8 +13,12 @@ httpClient.interceptors.request.use(async (config) => {
 })
 httpClient.interceptors.response.use(
   (config) => config,
-  (error: AxiosError) => {
-    return Promise.reject(error.response?.data)
+  (error: unknown) => {
+    if (!axios.isAxiosError(error)) return Promise.reject(error)
+    const message =
+      (error.response?.data as { message?: string } | undefined)?.message ??
+      error.message
+    return Promise.reject(new Error(message))
   }
 )
 export { httpClient }

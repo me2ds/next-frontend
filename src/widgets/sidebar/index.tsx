@@ -15,7 +15,7 @@ import { Loader } from "@/shared/ui/loader"
 import { AuthDialog } from "@/features/auth/ui/dialog"
 
 const UserInfo = dynamic(() =>
-  import("@/features/user/ui/info").then(({ UserInfo }) => UserInfo),
+  import("./user/ui/info").then(({ UserInfo }) => UserInfo),
 )
 import { AuthGuard } from "@/features/auth/ui/guard"
 import { MusicPanel } from "./music/ui"

@@ -1,7 +1,6 @@
 "use server"
 
 import { httpClient } from "@/shared/api/http-client"
-import { playlistStore } from "@/entities/music/playlist/model"
 import { handlers } from "@/shared/config/handlers"
 
 const deletePlaylist = async (playlistId: string) => {
