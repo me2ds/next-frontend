@@ -5,6 +5,7 @@ type User = {
   authIds: string[]
   username: string
   avatar: string | null
+  banner: string | null
 }
 
 type UserState = {

@@ -13,6 +13,8 @@ import {
 import { createFileReader } from "@/shared/utils/createFileReader"
 import { Pencil, Trash2 } from "lucide-react"
 import { toast } from "sonner"
+import { UserBanner } from "@/entities/user/ui/banner"
+import { uploadFile } from "@/shared/utils/uploadFile"
 
 const AccountInfo = () => {
   const { user, setUser } = UserStore()
@@ -24,45 +26,84 @@ const AccountInfo = () => {
   }
 
   const updateAvatar = async () => {
-    const input = document.createElement('input')
-    input.type = 'file'
-    input.accept = 'image/*'
-
-    input.onchange = async (e) => {
-      const { reader, promise } = createFileReader() 
-      const file = (e.target as HTMLInputElement).files?.[0]
-      if (!file) return
-      reader.readAsDataURL(file)
-      const base64 = await promise as string
-      const newUser = { ...user!, avatar: base64 }
-      try {
-        const updatedUser = await updateUser(newUser)
-        setUser(updatedUser)
-      } catch (e: any) {
-        toast.error(e.message)
-      }
+    const file = await uploadFile({
+      accept: "image/*",
+      maxSize: 5 * 1024 * 1024,
+    }).catch((e: any) => {
+      toast.error(e.message)
+    })
+    if (!file) return
+    const { reader, promise } = createFileReader()
+    reader.readAsDataURL(file)
+    const newUser = { ...user!, avatar: (await promise) as string }
+    try {
+      const updatedUser = await updateUser(newUser)
+      setUser(updatedUser)
+    } catch (e: any) {
+      toast.error(e.message)
     }
-    input.click()
+  }
+
+  const deleteBanner = async () => {
+    const newUser = { ...user!, banner: null }
+    const updatedUser = await updateUser(newUser)
+    setUser(updatedUser)
+  }
+
+  const updateBanner = async () => {
+    const file = await uploadFile({
+      accept: "image/*",
+      maxSize: 5 * 1024 * 1024,
+    }).catch((e: any) => {
+      toast.error(e.message)
+    })
+    if (!file) return
+    const { reader, promise } = createFileReader()
+    reader.readAsDataURL(file)
+    const newUser = { ...user!, banner: (await promise) as string }
+    try {
+      const updatedUser = await updateUser(newUser)
+      setUser(updatedUser)
+    } catch (e: any) {
+      toast.error(e.message)
+    }
   }
 
   return (
     <AuthGuard>
-      <div className={"flex"}>
+      <div className={"flex flex-col"}>
         <ContextMenu>
-          <ContextMenuTrigger className={"size-32 rounded-full"}>
-            <UserAvatar user={user!} className={"size-full rounded-full"} />
+          <ContextMenuTrigger className={"w-full h-44 sm:h-56 md:h-64 lg:h-72 xl:h-80"}>
+            <UserBanner src={user?.banner} />
           </ContextMenuTrigger>
           <ContextMenuContent>
-            <ContextMenuItem onClick={updateAvatar}>
+            <ContextMenuItem onClick={updateBanner}>
               <Pencil />
-              <span>Update avatar</span>
+              <span>Update banner</span>
             </ContextMenuItem>
-            <ContextMenuItem onClick={deleteAvatar}>
+            <ContextMenuItem onClick={deleteBanner}>
               <Trash2 />
-              <span>Delete avatar</span>
+              <span>Delete banner</span>
             </ContextMenuItem>
           </ContextMenuContent>
         </ContextMenu>
+        <div className={"flex p-3"}>
+          <ContextMenu>
+            <ContextMenuTrigger className={"size-36 rounded-full -mt-24 border-8 border-background z-10"}>
+              <UserAvatar user={user!} className={"size-full rounded-full"} />
+            </ContextMenuTrigger>
+            <ContextMenuContent>
+              <ContextMenuItem onClick={updateAvatar}>
+                <Pencil />
+                <span>Update avatar</span>
+              </ContextMenuItem>
+              <ContextMenuItem onClick={deleteAvatar}>
+                <Trash2 />
+                <span>Delete avatar</span>
+              </ContextMenuItem>
+            </ContextMenuContent>
+          </ContextMenu>
+        </div>
       </div>
     </AuthGuard>
   )

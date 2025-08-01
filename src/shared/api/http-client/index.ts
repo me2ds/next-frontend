@@ -1,4 +1,4 @@
-import axios, { AxiosError } from "axios"
+import axios from "axios"
 import { cookies } from "next/headers"
 
 const httpClient = axios.create({

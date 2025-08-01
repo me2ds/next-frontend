@@ -2,7 +2,6 @@ const handlers = {
   get: {
     user: {
       me: "/user/me",
-      profile: "/user/profile",
       id: (id: string) => `/user/${id}`,
     },
     playlist: {
