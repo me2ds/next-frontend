@@ -15,6 +15,7 @@ function initGithubAuth(): Variant {
 		redirect_uri: callbackUrl,
 		scope: "read:user"
 	})
+  console.log(`${githubAuthUrl}?${params.toString()}`)
 	return ({
     name: "Github",
     icon: "github-icon.svg",
@@ -36,6 +37,7 @@ function initGoogleAuth() {
 		response_type: "code",
 		scope: googleAuthScopes.join(" ")
 	})
+  console.log(`${googleAuthUrl}?${params.toString()}`)
 	return ({
     name: "Google",
     icon: "google-icon.svg",
