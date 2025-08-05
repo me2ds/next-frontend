@@ -26,7 +26,7 @@ const MainLayout = async ({ children }: { children: React.ReactNode }) => {
                 <Separator orientation={"vertical"} className={"ml-2"} />
               </div>
             </header>
-            <main className={"p-2 h-full"}>{children}</main>
+            <main className={"p-3 h-full"}>{children}</main>
           </SidebarInset>
         </SidebarProvider>
       </PlaylistProvider>

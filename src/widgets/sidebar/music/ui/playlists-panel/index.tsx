@@ -13,18 +13,18 @@ import {
 import { ChevronRight, ListMusic, Trash2 } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { CreateNewPlaylist } from "@/features/music/ui/new-playlist"
-import { playlistStore, Playlist } from "@/entities/music/playlist/model"
+import { PlaylistStore, Playlist } from "@/entities/music/playlist/model"
 import { deletePlaylist } from "@/features/music/api/delete-playlist"
 import { routes } from "@/shared/config/routes"
 
 const PlaylistsPanel = () => {
-  const { playlists } = playlistStore()
+  const { playlists } = PlaylistStore()
   const router = useRouter()
 
   const handleDelete = async (playlistId: string) => {
     const success = await deletePlaylist(playlistId)
     if (success) {
-      playlistStore.getState().deletePlaylist(playlistId)
+      PlaylistStore.getState().deletePlaylist(playlistId)
     }
   }
 

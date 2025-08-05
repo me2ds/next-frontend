@@ -10,12 +10,15 @@ type User = {
 
 type UserState = {
   user: User | null
+  snapshot: User | null
   setUser: (user: User | null) => void
+  takeSnapshot: () => void
   reset: () => void
 }
 
 const initialStore = {
-  user: null
+  user: null,
+  snapshot: null,
 }
 
 const UserStore = create<UserState>()((set) => ({
@@ -23,6 +26,9 @@ const UserStore = create<UserState>()((set) => ({
   setUser: (user) => {
     if (!user) return set(() => initialStore)
     set(() => ({ user }))
+  },
+  takeSnapshot: () => {
+    set((state) => ({ snapshot: state.user }))
   },
   reset: async () => {
     set(initialStore)

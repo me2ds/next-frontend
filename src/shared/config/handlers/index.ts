@@ -7,12 +7,12 @@ const handlers = {
     playlist: {
       all: "/playlist",
       id: (id: string) => `/playlist/${id}`,
-      ownerId: (ownerId: string) => `/playlist/owner/${ownerId}`,
+      my: "/playlist/my",
     },
     composition: {
       all: "/composition",
       id: (id: string) => `/composition/${id}`,
-      ownerId: (ownerId: string) => `/composition/owner/${ownerId}`,
+      my: "/composition/my",
     },
   },
   post: {

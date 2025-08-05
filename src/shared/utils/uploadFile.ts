@@ -1,6 +1,7 @@
 
 type Props = {
-  accept: string
+  /** @default image/* */
+  accept?: string
   multiple?: boolean
   /** @description file max size in bytes */
   maxSize?: number
@@ -9,7 +10,7 @@ type Props = {
 async function uploadFile(props: Props & { multiple: true }): Promise<File[]>
 async function uploadFile(props: Props & { multiple?: false }): Promise<File>
 
-async function uploadFile({ accept, multiple = false, maxSize }: Props) {
+async function uploadFile({ accept = "image/*", multiple = false, maxSize }: Props) {
   const input = document.createElement("input")
   input.type = "file"
   input.accept = accept

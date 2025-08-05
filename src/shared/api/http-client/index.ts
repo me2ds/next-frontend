@@ -9,6 +9,7 @@ const httpClient = axios.create({
 httpClient.interceptors.request.use(async (config) => {
   const cookieStore = await cookies()
   config.headers.Authorization = `Bearer ${cookieStore.get("authToken")?.value}`
+  console.log(config.url)
   return config
 })
 httpClient.interceptors.response.use(

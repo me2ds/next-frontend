@@ -1,6 +1,6 @@
 "use client"
 
-import { Playlist, playlistStore } from "@/entities/music/playlist/model"
+import { Playlist, PlaylistStore } from "@/entities/music/playlist/model"
 import { useEffect } from "react"
 
 const ClientSidePlaylistProvider = ({
@@ -8,7 +8,7 @@ const ClientSidePlaylistProvider = ({
 }: {
   playlists: Playlist[]
 }) => {
-  const { setPlaylists } = playlistStore()
+  const { setPlaylists } = PlaylistStore()
 
   useEffect(() => {
     setPlaylists(playlists)

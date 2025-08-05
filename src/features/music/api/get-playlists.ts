@@ -6,7 +6,7 @@ import { handlers } from "@/shared/config/handlers"
 
 const getPlaylists = async () => {
   try {
-    const { data } = await httpClient.get<Playlist[]>(handlers.get.playlist.all)
+    const { data } = await httpClient.get<Playlist[]>(handlers.get.playlist.my)
     return data
   } catch {}
   return []
