@@ -131,4 +131,10 @@ const AvatarPicker = () => {
   )
 }
 
-export { AvatarPicker }
+const AvatarPickerFallback = () => {
+  return (
+    <div className={"bg-accent size-36 rounded-full -mt-24 border-8 border-background"} />
+  )
+}
+
+export { AvatarPicker, AvatarPickerFallback }

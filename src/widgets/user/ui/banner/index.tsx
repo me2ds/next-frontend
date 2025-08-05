@@ -67,7 +67,7 @@ const UserBanner = () => {
         <div className={"size-full rounded-xl overflow-hidden relative"}>
           <Show
             when={user?.banner}
-            fallback={<div className={"bg-accent size-full"} />}
+            fallback={<BannerFallback />}
           >
             <Image
               src={user?.banner!}
@@ -92,4 +92,8 @@ const UserBanner = () => {
   )
 }
 
-export { UserBanner }
+const BannerFallback = () => {
+  return <div className={"bg-accent size-full"} />
+}
+
+export { UserBanner, BannerFallback }
