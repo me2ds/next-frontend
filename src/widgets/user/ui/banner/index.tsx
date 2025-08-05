@@ -23,7 +23,10 @@ const UserBanner = () => {
     setUser(newUser)
     toast.promise(updateUser(newUser), {
       loading: "Deleting banner...",
-      success: "Banner deleted",
+      success: (updatedUser) => {
+        setUser(updatedUser)
+        return "Banner deleted"
+      },
       error: (e) => {
         setUser(snapshot)
         return e.message

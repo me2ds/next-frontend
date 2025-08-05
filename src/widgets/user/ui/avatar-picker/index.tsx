@@ -38,7 +38,10 @@ const AvatarPicker = () => {
     setUser(newUser)
     toast.promise(updateUser(newUser), {
       loading: "Deleting avatar...",
-      success: "Avatar deleted",
+      success: (updatedUser) => {
+        setUser(updatedUser)
+        return "Avatar deleted"
+      },
       error: (e) => {
         setUser(snapshot)
         return e.message
