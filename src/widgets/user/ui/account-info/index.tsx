@@ -1,34 +1,15 @@
 "use client"
 
 import { UsernameBadge } from "@/entities/user/ui/username-badge"
-import { BannerFallback } from "../banner"
-import dynamic from "next/dynamic"
-import { Suspense } from "react"
-import { AvatarPickerFallback } from "../avatar-picker"
-
-const UserBanner = dynamic(() =>
-  import("../banner").then(({ UserBanner }) => UserBanner),
-  {
-    loading: () => <BannerFallback />,
-  }
-)
-const AvatarPicker = dynamic(() =>
-  import("../avatar-picker").then(({ AvatarPicker }) => AvatarPicker),
-  {
-    loading: () => <AvatarPickerFallback />,
-  }
-)
+import { AvatarPicker } from "../avatar-picker"
+import { UserBanner } from "../banner"
 
 const AccountInfo = () => {
   return (
     <div className={"flex flex-col"}>
-      <Suspense fallback={<BannerFallback />}>
-        <UserBanner />
-      </Suspense>
+      <UserBanner />
       <div className={"flex p-3"}>
-        <Suspense fallback={<AvatarPickerFallback />}>
-          <AvatarPicker />
-        </Suspense>
+        <AvatarPicker />
         <UsernameBadge />
       </div>
     </div>
