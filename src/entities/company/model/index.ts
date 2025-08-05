@@ -9,7 +9,7 @@ type Variant = {
 function initGithubAuth(): Variant {
 	const githubAuthUrl = "https://github.com/login/oauth/authorize"
 	const clientId = process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID!
-	const callbackUrl = process.env.NEXT_PUBLIC_GITHUB_CALLBACK_URL!
+	const callbackUrl = process.env.NEXT_PUBLIC_CALLBACK_URL! + "/auth/github"
 	const params = new URLSearchParams({
 		client_id: clientId,
 		redirect_uri: callbackUrl,
@@ -29,7 +29,7 @@ function initGoogleAuth() {
   	"https://www.googleapis.com/auth/userinfo.profile",
 	]
 	const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!
-	const callbackUrl = process.env.NEXT_PUBLIC_GOOGLE_CALLBACK_URL!
+	const callbackUrl = process.env.NEXT_PUBLIC_CALLBACK_URL! + "/auth/google"
 	const params = new URLSearchParams({
 		client_id: clientId,
 		redirect_uri: callbackUrl,
