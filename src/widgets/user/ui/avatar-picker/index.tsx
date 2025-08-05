@@ -28,12 +28,12 @@ import { fileToURL } from "@/shared/utils/fileToURL"
 const AvatarPicker = () => {
   const [imageData, setImageData] = useState<Blob | null>(null)
   const [imageUrl, setImageUrl] = useState<string | null>(null)
-  const { user, setUser, takeSnapshot, snapshot } = UserStore()
+  const { user, setUser } = UserStore()
   const imageCropperRef = useRef<HTMLDivElement>(null)
   const [open, setOpen] = useState<boolean>(false)
 
   const deleteAvatar = async () => {
-    takeSnapshot()
+    const rollback = user
     const newUser = { ...user!, avatar: null }
     setUser(newUser)
     toast.promise(updateUser(newUser), {
@@ -43,7 +43,7 @@ const AvatarPicker = () => {
         return "Avatar deleted"
       },
       error: (e) => {
-        setUser(snapshot)
+        setUser(rollback)
         return e.message
       },
     })
@@ -59,11 +59,11 @@ const AvatarPicker = () => {
   }
 
   const cropperCallback = async (image: Blob) => {
+    const rollback = user
     const { reader, promise } = createFileReader()
     reader.readAsDataURL(image)
     const result = await promise as string
     const newUser = { ...user!, avatar: result }
-    takeSnapshot()
     setUser(newUser)
     toast.promise(updateUser(newUser), {
       loading: "Updating avatar...",
@@ -72,7 +72,7 @@ const AvatarPicker = () => {
         return "Avatar updated"
       },
       error: (e) => {
-        setUser(snapshot)
+        setUser(rollback)
         return e.message
       },
     })

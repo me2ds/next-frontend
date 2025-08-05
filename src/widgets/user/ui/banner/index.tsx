@@ -15,10 +15,10 @@ import { fileToURL } from "@/shared/utils/fileToURL"
 import { createFileReader } from "@/shared/utils/createFileReader"
 
 const UserBanner = () => {
-  const { user, setUser, takeSnapshot, snapshot } = UserStore()
+  const { user, setUser } = UserStore()
 
   const deleteBanner = async () => {
-    takeSnapshot()
+    const rollback = user
     const newUser = { ...user!, banner: null }
     setUser(newUser)
     toast.promise(updateUser(newUser), {
@@ -28,7 +28,7 @@ const UserBanner = () => {
         return "Banner deleted"
       },
       error: (e) => {
-        setUser(snapshot)
+        setUser(rollback)
         return e.message
       },
     })
@@ -42,7 +42,7 @@ const UserBanner = () => {
       toast.error(e.message)
     })
     if (!file) return
-    takeSnapshot()
+    const rollback = user
     setUser({ ...user!, banner: fileToURL(file) })
     const { reader, promise } = createFileReader()
     reader.readAsDataURL(file)
@@ -54,7 +54,7 @@ const UserBanner = () => {
         return "Banner updated"
       },
       error: (e) => {
-        setUser(snapshot)
+        setUser(rollback)
         return e.message
       },
     })
