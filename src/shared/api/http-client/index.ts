@@ -1,4 +1,4 @@
-import axios, { AxiosError } from "axios"
+import axios from "axios"
 import { cookies } from "next/headers"
 
 const httpClient = axios.create({
@@ -9,12 +9,17 @@ const httpClient = axios.create({
 httpClient.interceptors.request.use(async (config) => {
   const cookieStore = await cookies()
   config.headers.Authorization = `Bearer ${cookieStore.get("authToken")?.value}`
+  console.log(config.url)
   return config
 })
 httpClient.interceptors.response.use(
   (config) => config,
-  (error: AxiosError) => {
-    return Promise.reject(error.response?.data)
+  (error: unknown) => {
+    if (!axios.isAxiosError(error)) return Promise.reject(error)
+    const message =
+      (error.response?.data as { message?: string } | undefined)?.message ??
+      error.message
+    return Promise.reject(new Error(message))
   }
 )
 export { httpClient }

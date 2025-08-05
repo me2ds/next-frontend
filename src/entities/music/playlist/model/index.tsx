@@ -1,12 +1,14 @@
 import { create } from "zustand"
+import { Composition } from "@/entities/music/composition/model"
 
 type Playlist = {
   id: string
   name: string
   ownerId: string
+  compositions: Composition[]
 }
 
-type PlaylistStore = {
+type PlaylistState = {
   playlists: Playlist[]
   addPlaylist: (playlist: Playlist) => void
   setPlaylists: (playlists: Playlist[]) => void
@@ -17,7 +19,7 @@ const initialState = {
   playlists: [],
 }
 
-const playlistStore = create<PlaylistStore>((set) => ({
+const PlaylistStore = create<PlaylistState>()((set) => ({
   ...initialState,
   addPlaylist: (playlist) => {
     set((state) => ({ playlists: [...state.playlists, playlist] }))
@@ -32,4 +34,4 @@ const playlistStore = create<PlaylistStore>((set) => ({
   },
 }))
 
-export { playlistStore, type Playlist }
+export { PlaylistStore, type Playlist }

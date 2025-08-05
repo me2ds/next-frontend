@@ -6,6 +6,16 @@ type Server = {
   name: string
 }
 
-type ServerStore = {
+type ServerState = {
   servers: Server[]
 }
+
+const initialStore = {
+  servers: []
+}
+
+const ServerStore = create<ServerState>()(() => ({
+  ...initialStore,
+}))
+
+export { type Server, ServerStore }

@@ -7,6 +7,16 @@ type Group = {
   members: string[]
 }
 
-type GroupStore = {
+type GroupState = {
   groups: Group[]
 }
+
+const initialStore = {
+  groups: []
+}
+
+const GroupStore = create<GroupState>()(() => ({
+  ...initialStore,
+}))
+
+export { type Group, GroupStore }

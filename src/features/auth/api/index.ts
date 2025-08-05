@@ -9,12 +9,13 @@ const auth = async (code: string | null, company: Company) => {
   try {
     const { data } = await httpClient.post<{ authToken: string }>(
       handlers.post.user.auth.company(company),
-      { code },
+      { code }
     )
-    cookieStore.set("authToken", data.authToken)
+    cookieStore.set("authToken", data.authToken, {
+      httpOnly: true,
+    })
     return data.authToken
   } catch {}
-  return null
 }
 
 export { auth }

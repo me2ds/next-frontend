@@ -6,12 +6,13 @@ import { handlers } from "@/shared/config/handlers"
 
 const getUser = async () => {
   try {
-    const { data } = await httpClient.get<{ user: User }>(
-      handlers.get.user.profile
+    const { data } = await httpClient.get<User>(
+      handlers.get.user.me
     )
-    return data.user
-  } catch {}
-  return null
+    return data
+  } catch (error) {
+    throw error
+  }
 }
 
 export { getUser }

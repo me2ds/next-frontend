@@ -1,7 +1,7 @@
 "use client"
 import { type User, UserStore } from "@/entities/user/model"
 import { routes } from "@/shared/config/routes"
-import { Avatar, AvatarFallback, AvatarImage } from "@/shared/ui/avatar"
+import { UserAvatar } from "@/entities/user/ui/avatar"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -22,7 +22,7 @@ import {
 import Link from "next/link"
 
 const UserInfo = () => {
-  const user = UserStore().user as User
+  const { user } = UserStore()
   const { isMobile } = useSidebar()
 
   return (
@@ -34,8 +34,8 @@ const UserInfo = () => {
               size="lg"
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground cursor-pointer"
             >
-              <UserAvatar user={user} />
-              <Username user={user} />
+              <UserAvatar user={user!} />
+              <Username user={user!} />
               <ChevronsUpDown className="ml-auto size-4" />
             </SidebarMenuButton>
           </DropdownMenuTrigger>
@@ -47,8 +47,8 @@ const UserInfo = () => {
           >
             <DropdownMenuLabel className="p-0 font-normal">
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                <UserAvatar user={user} />
-                <Username user={user} />
+                <UserAvatar user={user!} />
+                <Username user={user!} />
               </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
@@ -76,21 +76,6 @@ const Username = ({ user }: { user: User }) => {
     <div className="grid flex-1 text-left text-sm leading-tight ml-1">
       <span className="truncate font-semibold">{user.username}</span>
     </div>
-  )
-}
-
-const UserAvatar = ({ user }: { user: User }) => {
-  const getFallback = () => {
-    const [firstName, lastName] = user.username.split(" ")
-    if (!lastName) return firstName[0]
-    const fallback = `${firstName[0]}${lastName[0]}`
-    return fallback
-  }
-  return (
-    <Avatar>
-      <AvatarFallback>{getFallback()}</AvatarFallback>
-      <AvatarImage src={user.avatar} />
-    </Avatar>
   )
 }
 

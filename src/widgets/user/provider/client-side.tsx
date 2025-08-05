@@ -4,13 +4,7 @@ import { User, UserStore } from "@/entities/user/model"
 import { AuthStore } from "@/entities/auth/model"
 import { useEffect } from "react"
 
-const ClientSideUserProvider = ({
-  user,
-  children,
-}: {
-  user: User | null
-  children: React.ReactNode
-}) => {
+const ClientSideUserProvider = ({ user }: { user: User | null }) => {
   const { setUser } = UserStore()
   const { setShowAuth } = AuthStore()
   useEffect(() => {
@@ -18,8 +12,8 @@ const ClientSideUserProvider = ({
       setShowAuth(true)
     }
     setUser(user)
-  }, [user])
-  return children
+  }, [user, setShowAuth, setUser])
+  return null
 }
 
 export { ClientSideUserProvider }
