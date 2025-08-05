@@ -9,7 +9,7 @@ const getUser = async () => {
     const { data } = await httpClient.get<User>(
       handlers.get.user.me,
       {
-        cache: false
+        id: "me"
       }
     )
     return data
