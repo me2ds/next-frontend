@@ -7,10 +7,16 @@ import { Suspense } from "react"
 import { AvatarPickerFallback } from "../avatar-picker"
 
 const UserBanner = dynamic(() =>
-  import("../banner").then(({ UserBanner }) => UserBanner)
+  import("../banner").then(({ UserBanner }) => UserBanner),
+  {
+    loading: () => <BannerFallback />,
+  }
 )
 const AvatarPicker = dynamic(() =>
-  import("../avatar-picker").then(({ AvatarPicker }) => AvatarPicker)
+  import("../avatar-picker").then(({ AvatarPicker }) => AvatarPicker),
+  {
+    loading: () => <AvatarPickerFallback />,
+  }
 )
 
 const AccountInfo = () => {
