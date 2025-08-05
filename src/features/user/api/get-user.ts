@@ -7,7 +7,10 @@ import { handlers } from "@/shared/config/handlers"
 const getUser = async () => {
   try {
     const { data } = await httpClient.get<User>(
-      handlers.get.user.me
+      handlers.get.user.me,
+      {
+        cache: false
+      }
     )
     return data
   } catch (error) {
