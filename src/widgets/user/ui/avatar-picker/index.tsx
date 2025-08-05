@@ -59,11 +59,11 @@ const AvatarPicker = () => {
   }
 
   const cropperCallback = async (image: Blob) => {
-    const rollback = user
     const { reader, promise } = createFileReader()
     reader.readAsDataURL(image)
     const result = await promise as string
     const newUser = { ...user!, avatar: result }
+    takeSnapshot()
     setUser(newUser)
     toast.promise(updateUser(newUser), {
       loading: "Updating avatar...",
@@ -72,7 +72,7 @@ const AvatarPicker = () => {
         return "Avatar updated"
       },
       error: (e) => {
-        setUser(rollback)
+        setUser(snapshot)
         return e.message
       },
     })
