@@ -1,10 +1,13 @@
 import axios from "axios"
 import { cookies } from "next/headers"
-
-const httpClient = axios.create({
+import { setupCache } from "axios-cache-interceptor"
+ 
+const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
   withCredentials: true,
 })
+
+const httpClient = setupCache(api)
 
 httpClient.interceptors.request.use(async (config) => {
   const cookieStore = await cookies()

@@ -1,11 +1,16 @@
 "use server"
 
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/shared/ui/sidebar"
-import { AppSidebar } from "@/widgets/sidebar"
 import { UserProvider } from "@/widgets/user/provider"
 import { cookies } from "next/headers"
 import { PlaylistProvider } from "@/widgets/music/playlist/provider"
 import { Separator } from "@/shared/ui/separator"
+import dynamic from "next/dynamic"
+import { Suspense } from "react"
+
+const AppSidebar = dynamic(() =>
+  import("@/widgets/sidebar").then(({ AppSidebar }) => AppSidebar)
+)
 
 const MainLayout = async ({ children }: { children: React.ReactNode }) => {
   const cookieStore = await cookies()
@@ -14,7 +19,9 @@ const MainLayout = async ({ children }: { children: React.ReactNode }) => {
     <UserProvider>
       <PlaylistProvider>
         <SidebarProvider defaultOpen={defaultOpen}>
-          <AppSidebar />
+          <Suspense fallback={null}>
+            <AppSidebar />
+          </Suspense>
           <SidebarInset>
             <header
               className={
