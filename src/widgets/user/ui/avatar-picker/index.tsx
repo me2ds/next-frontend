@@ -59,7 +59,7 @@ const AvatarPicker = () => {
   }
 
   const cropperCallback = async (image: Blob) => {
-    takeSnapshot()
+    const rollback = user
     const { reader, promise } = createFileReader()
     reader.readAsDataURL(image)
     const result = await promise as string
@@ -72,12 +72,12 @@ const AvatarPicker = () => {
         return "Avatar updated"
       },
       error: (e) => {
-        setUser(snapshot)
+        setUser(rollback)
         return e.message
       },
     })
   }
-
+  
   const handleSave = () => {
     imageCropperRef.current?.click()
     setOpen(false)
