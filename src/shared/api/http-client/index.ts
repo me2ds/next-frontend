@@ -1,7 +1,7 @@
 import axios from "axios"
 import { cookies } from "next/headers"
 import { setupCache } from "axios-cache-interceptor"
- 
+
 const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
   withCredentials: true,
@@ -26,3 +26,37 @@ httpClient.interceptors.response.use(
   }
 )
 export { httpClient }
+
+
+// "use server"
+//
+// import { cookies } from "next/headers"
+//
+// const API_URL = process.env.NEXT_PUBLIC_API_URL
+//
+// type RequestConfig = {
+//   endpoint: string,
+//   body?: any,
+// }
+//
+// class HttpClient {
+//   private baseURL: string
+//   constructor(baseURL?: string) {
+//     this.baseURL = baseURL ?? API_URL!
+//   }
+//
+//   async get<T>({ endpoint, ...opts }: RequestConfig) {
+//     return fetch(this.baseURL + endpoint, {
+//       method: "GET",
+//       ...opts,
+//     }) as T
+//   }
+//
+//   async post<T>(config: RequestConfig) { }
+//
+//   async put<T>(config: RequestConfig) { }
+//
+//   async delete<T>(config: RequestConfig) { }
+//
+//   async patch<T>(config: RequestConfig) { }
+// }

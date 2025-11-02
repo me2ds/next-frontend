@@ -2,9 +2,15 @@
 
 import { UserStore } from "@/entities/user/model"
 
-const AuthGuard = ({ children }: { children: React.ReactNode }) => {
+interface Props { 
+  children: React.ReactNode
+  showIfUser?: boolean
+}
+
+const AuthGuard = ({ children, showIfUser = true }: Props) => {
   const { user } = UserStore()
-  if (user) return children
+  if (showIfUser && user) return children
+  if (!showIfUser && !user) return children
   return null
 }
 

@@ -31,9 +31,11 @@ const AuthDialog = () => {
         <SidebarMenuButton
           size="lg"
           className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+          tooltip="Войти в аккаунт"
         >
           <LogIn className={"ml-2"} />
-          <ChevronsUpDown className="ml-auto size-4" />
+          <span className={"shrink-0"}>Войти в аккаунт</span>
+          <ChevronsUpDown className={"ml-auto size-4"} />
         </SidebarMenuButton>
       </DialogTrigger>
       <DialogContent className={"w-auto max-w-lg md:max-w-96"}>

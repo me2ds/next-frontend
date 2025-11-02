@@ -2,6 +2,11 @@
 const routes = {
   root: "/",
   account: "/account",
+  about: "/about",
+  faq: "/faq",
+  privacy: "/privacy",
+  terms: "/terms",
+  github: "https://github.com/me2ds/next-frontend",
   music: {
     root: "/music",
     wave: "/music/wave",

@@ -33,6 +33,7 @@ const UserInfo = () => {
             <SidebarMenuButton
               size="lg"
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground cursor-pointer"
+              tooltip={user!.username}
             >
               <UserAvatar user={user!} />
               <Username user={user!} />
