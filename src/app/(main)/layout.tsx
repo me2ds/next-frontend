@@ -6,13 +6,13 @@ import { Sidebar } from "@/widgets/sidebar"
 
 const MainLayout = async ({ children }: { children: React.ReactNode }) => {
   return (
-    <UserProvider>
-      <PlaylistProvider>
-        <Sidebar>
-          {children}
-        </Sidebar>
-      </PlaylistProvider>
-    </UserProvider>
+    <>
+      <UserProvider />
+      <PlaylistProvider />
+      <Sidebar>
+        {children}
+      </Sidebar>
+    </>
   )
 }
 
