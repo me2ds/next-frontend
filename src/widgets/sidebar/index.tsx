@@ -1,22 +1,14 @@
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/shared/ui/sidebar"
 import { Separator } from "@/shared/ui/separator"
-import { Suspense } from "react"
+import { AppSidebar } from "./app-sidebar"
 import { cookies } from "next/headers"
-import dynamic from "next/dynamic"
-
-const AppSidebar = dynamic(() =>
-  import("@/widgets/sidebar/app-sidebar").then(({ AppSidebar }) => AppSidebar),
-  { ssr: true },
-)
 
 const Sidebar = async ({ children }: { children: React.ReactNode }) => {
   const cookieStore = await cookies()
   const defaultOpen = cookieStore.get("sidebar_state")?.value === "true"
   return (
     <SidebarProvider defaultOpen={defaultOpen}>
-      <Suspense fallback={null}>
-        <AppSidebar />
-      </Suspense>
+      <AppSidebar />
       <SidebarInset>
         <header
           className={

@@ -21,8 +21,10 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
       <body>
         <ThemeProvider attribute={"class"} defaultTheme={"system"} enableSystem>
           {children}
-          <Suspense fallback={null}>
+          <Suspense>
             <Toaster position="top-right" swipeDirections={["right", "top"]} />
+          </Suspense>
+          <Suspense>
             <ThemeToggle />
           </Suspense>
         </ThemeProvider>

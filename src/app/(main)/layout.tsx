@@ -3,15 +3,20 @@
 import { UserProvider } from "@/widgets/user/provider"
 import { PlaylistProvider } from "@/widgets/music/playlist/provider"
 import { Sidebar } from "@/widgets/sidebar"
+import { Suspense } from "react"
 
 const MainLayout = async ({ children }: { children: React.ReactNode }) => {
   return (
     <>
-      <UserProvider />
-      <PlaylistProvider />
-      <Sidebar>
-        {children}
-      </Sidebar>
+      <Suspense>
+        <UserProvider />
+      </Suspense>
+      <Suspense>
+        <PlaylistProvider />
+      </Suspense>
+      <Suspense>
+        <Sidebar>{children}</Sidebar>
+      </Suspense>
     </>
   )
 }

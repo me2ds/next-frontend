@@ -15,7 +15,12 @@ const GET = async (
   const cookieStore = await cookies()
   const redirectTo = cookieStore.get("redirectTo")?.value ?? routes.root
   cookieStore.delete("redirectTo")
-  await auth(code, companyParam)
+  const authToken = await auth(code, companyParam)
+  if (authToken) {
+    cookieStore.set("authToken", authToken, {
+      httpOnly: true,
+    })
+  }
   return redirect(redirectTo)
 }
 

@@ -1,4 +1,4 @@
-"use server"
+"use cache"
 
 import {
   Card,
